@@ -56,3 +56,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Application Personal Login ###
+src/main/resources/application-dev.properties
