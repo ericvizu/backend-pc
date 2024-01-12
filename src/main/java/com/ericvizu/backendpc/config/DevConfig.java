@@ -15,7 +15,7 @@ public class DevConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Motherboard mobo = new Motherboard(1L, "ASRock B500M Steel Legend", "AM4", "DDR4", 4, 3600, 6, 1, 1);
+        Motherboard mobo = new Motherboard(1L, "ASRock B550M Steel Legend", "AM4", "DDR4", 4, 3600, 6, 1, 1);
         motherboardRepository.save(mobo);
 
     }
