@@ -24,9 +24,21 @@ public class MotherboardResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Motherboard> read(@PathVariable Long id){
+    public ResponseEntity<Motherboard> read(@PathVariable Long id) {
         Motherboard obj = service.read(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Motherboard> update(@PathVariable Long id, @RequestBody Motherboard obj) {
+        obj = service.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Motherboard> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

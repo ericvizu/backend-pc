@@ -19,10 +19,34 @@ public class MotherboardService {
     }
 
     // Read Motherboard
-    public Motherboard read(Long id){
+    public Motherboard read(Long id) {
         Optional<Motherboard> obj = repository.findById(id);
         return obj.orElse(null); // Missing exception treating
     }
 
+    // Update Motherboard
+    public Motherboard update(Long id, Motherboard obj) {
+        Motherboard entity = repository.getReferenceById(id);
+        updateData(entity, obj);
+        return repository.save(entity); // Missing exception treating
+    }
+
+    // Delete Motherboard
+    public void delete(Long id) {
+        repository.deleteById(id); // Missing exception treating
+    }
+
+    // Update each Motherboard entry
+    // Method has to be updated if entity gets new parameters
+    public void updateData(Motherboard entity, Motherboard obj) {
+        entity.setName(obj.getName());
+        entity.setSocket(obj.getSocket());
+        entity.setRamGen(obj.getRamGen());
+        entity.setRamSlots(obj.getRamSlots());
+        entity.setRamFreq(obj.getRamFreq());
+        entity.setSataSlots(obj.getSataSlots());
+        entity.setM2Gen4Slots(obj.getM2Gen4Slots());
+        entity.setM2Gen3Slots(obj.getM2Gen3Slots());
+    }
 
 }
