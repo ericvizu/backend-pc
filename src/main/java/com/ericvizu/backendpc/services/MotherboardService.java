@@ -2,7 +2,11 @@ package com.ericvizu.backendpc.services;
 
 import com.ericvizu.backendpc.entities.Motherboard;
 import com.ericvizu.backendpc.repositories.MotherboardRepository;
+import com.ericvizu.backendpc.services.exceptions.DatabaseException;
+import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,20 +24,41 @@ public class MotherboardService {
 
     // Read Motherboard
     public Motherboard read(Long id) {
-        Optional<Motherboard> obj = repository.findById(id);
-        return obj.orElse(null); // Missing exception treating
+        try {
+            Optional<Motherboard> obj = repository.findById(id);
+            return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Missing id number.");
+        }
+
     }
 
     // Update Motherboard
     public Motherboard update(Long id, Motherboard obj) {
-        Motherboard entity = repository.getReferenceById(id);
-        updateData(entity, obj);
-        return repository.save(entity); // Missing exception treating
+        try {
+            Motherboard entity = repository.getReferenceById(id);
+            updateData(entity, obj);
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     // Delete Motherboard
     public void delete(Long id) {
-        repository.deleteById(id); // Missing exception treating
+        try {
+            if (!repository.existsById(id)) {
+                throw new ResourceNotFoundException(id);
+            }
+            repository.deleteById(id);
+
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Missing id number.");
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     // Update each Motherboard entry
