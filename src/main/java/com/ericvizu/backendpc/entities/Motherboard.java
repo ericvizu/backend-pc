@@ -1,5 +1,6 @@
 package com.ericvizu.backendpc.entities;
 
+import com.ericvizu.backendpc.dto.MotherboardDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -26,16 +27,15 @@ public class Motherboard implements Serializable {
     public Motherboard() {
     }
 
-    public Motherboard(Long id, String name, String socket, String ramGen, Integer ramSlots, Integer ramFreq, Integer sataSlots, Integer m2Gen4Slots, Integer m2Gen3Slots) {
-        this.id = id;
-        this.name = name;
-        this.socket = socket;
-        this.ramGen = ramGen;
-        this.ramSlots = ramSlots;
-        this.ramFreq = ramFreq;
-        this.sataSlots = sataSlots;
-        this.m2Gen4Slots = m2Gen4Slots;
-        this.m2Gen3Slots = m2Gen3Slots;
+    public Motherboard(MotherboardDTO motherboardDTO) {
+        this.name = motherboardDTO.name();
+        this.socket = motherboardDTO.socket();
+        this.ramGen = motherboardDTO.ramGen();
+        this.ramSlots = motherboardDTO.ramSlots();
+        this.ramFreq = motherboardDTO.ramFreq();
+        this.sataSlots = motherboardDTO.sataSlots();
+        this.m2Gen4Slots = motherboardDTO.m2Gen4Slots();
+        this.m2Gen3Slots = motherboardDTO.m2Gen3Slots();
     }
 
     public Long getId() {

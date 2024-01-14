@@ -1,5 +1,6 @@
 package com.ericvizu.backendpc.resources;
 
+import com.ericvizu.backendpc.dto.MotherboardDTO;
 import com.ericvizu.backendpc.entities.Motherboard;
 import com.ericvizu.backendpc.services.MotherboardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/motherboards")
+@RequestMapping(value = "/motherboard")
 public class MotherboardResource {
 
     @Autowired
     private MotherboardService service;
 
     @PostMapping
-    public ResponseEntity<Motherboard> create(@RequestBody Motherboard obj) {
-        obj = service.create(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+    public ResponseEntity<Motherboard> create(@RequestBody MotherboardDTO obj) {
+        Motherboard newObj = service.create(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+        return ResponseEntity.created(uri).body(newObj);
     }
 
     @GetMapping(value = "/{id}")
@@ -30,9 +31,9 @@ public class MotherboardResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Motherboard> update(@PathVariable Long id, @RequestBody Motherboard obj) {
-        obj = service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<Motherboard> update(@PathVariable Long id, @RequestBody MotherboardDTO obj) {
+        Motherboard entity = service.update(id, obj);
+        return ResponseEntity.ok().body(entity);
     }
 
     @DeleteMapping(value = "/{id}")

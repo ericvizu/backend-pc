@@ -1,5 +1,6 @@
 package com.ericvizu.backendpc.services;
 
+import com.ericvizu.backendpc.dto.MotherboardDTO;
 import com.ericvizu.backendpc.entities.Motherboard;
 import com.ericvizu.backendpc.repositories.MotherboardRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
@@ -18,8 +19,9 @@ public class MotherboardService {
     private MotherboardRepository repository;
 
     // Create Motherboard
-    public Motherboard create(Motherboard obj) {
-        return repository.save(obj);
+    public Motherboard create(MotherboardDTO obj) {
+        Motherboard motherboard = new Motherboard(obj);
+        return repository.save(motherboard);
     }
 
     // Read Motherboard
@@ -34,7 +36,7 @@ public class MotherboardService {
     }
 
     // Update Motherboard
-    public Motherboard update(Long id, Motherboard obj) {
+    public Motherboard update(Long id, MotherboardDTO obj) {
         try {
             Motherboard entity = repository.getReferenceById(id);
             updateData(entity, obj);
@@ -61,17 +63,19 @@ public class MotherboardService {
         }
     }
 
+    // TODO Create "Find All Motherboard" method
+
     // Update each Motherboard entry
     // Method has to be updated if entity gets new parameters
-    public void updateData(Motherboard entity, Motherboard obj) {
-        entity.setName(obj.getName());
-        entity.setSocket(obj.getSocket());
-        entity.setRamGen(obj.getRamGen());
-        entity.setRamSlots(obj.getRamSlots());
-        entity.setRamFreq(obj.getRamFreq());
-        entity.setSataSlots(obj.getSataSlots());
-        entity.setM2Gen4Slots(obj.getM2Gen4Slots());
-        entity.setM2Gen3Slots(obj.getM2Gen3Slots());
+    public void updateData(Motherboard entity, MotherboardDTO obj) {
+        if (!(obj.name() == null)) entity.setName(obj.name());
+        if (!(obj.socket() == null)) entity.setSocket(obj.socket());
+        if (!(obj.ramGen() == null)) entity.setRamGen(obj.ramGen());
+        if (!(obj.ramSlots() == null)) entity.setRamSlots(obj.ramSlots());
+        if (!(obj.ramFreq() == null)) entity.setRamFreq(obj.ramFreq());
+        if (!(obj.sataSlots() == null)) entity.setSataSlots(obj.sataSlots());
+        if (!(obj.m2Gen3Slots() == null)) entity.setM2Gen3Slots(obj.m2Gen3Slots());
+        if (!(obj.m2Gen4Slots() == null)) entity.setM2Gen4Slots(obj.m2Gen4Slots());
     }
 
 }
