@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/motherboard")
@@ -40,6 +41,11 @@ public class MotherboardResource {
     public ResponseEntity<Motherboard> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Motherboard>> findAll() {
+        return ResponseEntity.ok().body(service.findAll());
     }
 
 }

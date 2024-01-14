@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -63,7 +64,9 @@ public class MotherboardService {
         }
     }
 
-    // TODO Create "Find All Motherboard" method
+    public List<Motherboard> findAll() {
+        return repository.findAll();
+    }
 
     // Update each Motherboard entry
     // Method has to be updated if entity gets new parameters
