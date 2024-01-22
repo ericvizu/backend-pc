@@ -6,11 +6,13 @@ import com.ericvizu.backendpc.repositories.MotherboardRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.dialect.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -21,8 +23,13 @@ public class MotherboardService {
 
     // Create Motherboard
     public Motherboard create(MotherboardDTO obj) {
-        Motherboard motherboard = new Motherboard(obj);
-        return repository.save(motherboard);
+            Motherboard motherboard = new Motherboard(obj);
+            for (Motherboard m : findAll()) {
+                if ((Objects.equals(m.getName(), motherboard.getName())) && (Objects.equals(m.getBrand(), motherboard.getBrand()))) {
+                    throw new DatabaseException("Motherboard with same name found");
+                }
+            }
+            return repository.save(motherboard);
     }
 
     // Read Motherboard
