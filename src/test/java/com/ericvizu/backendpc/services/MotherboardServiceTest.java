@@ -55,6 +55,7 @@ class MotherboardServiceTest {
         List<Motherboard> result = this.service.findAll();
 
         assertNotNull(result);
+        assertEquals(result.get(0).getBrand(), BRAND);
         assertEquals(result.get(0).getName(), NAME);
         assertEquals(result.get(0).getSocket(), SOCKET);
         assertEquals(result.get(0).getRamGen(), RAMGEN);

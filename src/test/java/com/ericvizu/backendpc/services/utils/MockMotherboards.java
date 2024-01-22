@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MockMotherboards {
-
+    public static String BRAND = "brand de teste";
     public static String NAME = "nome de teste";
     public static String SOCKET = "socket de teste";
     public static String RAMGEN = "ramGen de teste";

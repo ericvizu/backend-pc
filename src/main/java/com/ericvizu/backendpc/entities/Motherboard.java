@@ -13,6 +13,7 @@ public class Motherboard implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String brand; // Mobo brand
     private String name; // Mobo name
     private String socket; // Mobo CPU socket
     private String ramGen; // Mobo RAM generation
@@ -28,6 +29,7 @@ public class Motherboard implements Serializable {
     }
 
     public Motherboard(MotherboardDTO motherboardDTO) {
+        this.brand = motherboardDTO.brand();
         this.name = motherboardDTO.name();
         this.socket = motherboardDTO.socket();
         this.ramGen = motherboardDTO.ramGen();
@@ -45,6 +47,12 @@ public class Motherboard implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) { this.brand = brand; }
 
     public String getName() {
         return name;

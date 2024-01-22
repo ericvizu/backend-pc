@@ -71,6 +71,7 @@ public class MotherboardService {
     // Update each Motherboard entry
     // Method has to be updated if entity gets new parameters
     public void updateData(Motherboard entity, MotherboardDTO obj) {
+        if (!(obj.brand() == null)) entity.setBrand(obj.brand());
         if (!(obj.name() == null)) entity.setName(obj.name());
         if (!(obj.socket() == null)) entity.setSocket(obj.socket());
         if (!(obj.ramGen() == null)) entity.setRamGen(obj.ramGen());
