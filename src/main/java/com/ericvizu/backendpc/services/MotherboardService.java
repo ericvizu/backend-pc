@@ -25,7 +25,7 @@ public class MotherboardService {
     public Motherboard create(MotherboardDTO obj) {
             Motherboard motherboard = new Motherboard(obj);
             for (Motherboard m : findAll()) {
-                if ((Objects.equals(m.getName(), motherboard.getName())) && (Objects.equals(m.getBrand(), motherboard.getBrand()))) {
+                if ((Objects.equals(m.getName().toUpperCase(), motherboard.getName().toUpperCase())) && (Objects.equals(m.getBrand().toUpperCase(), motherboard.getBrand().toUpperCase()))) {
                     throw new DatabaseException("Motherboard with same name found");
                 }
             }
