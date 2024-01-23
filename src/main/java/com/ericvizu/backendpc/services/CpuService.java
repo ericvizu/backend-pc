@@ -1,12 +1,14 @@
 package com.ericvizu.backendpc.services;
 
-import com.ericvizu.backendpc.dto.MotherboardDTO;
-import com.ericvizu.backendpc.entities.Motherboard;
-import com.ericvizu.backendpc.repositories.MotherboardRepository;
+import com.ericvizu.backendpc.dto.CpuDTO;
+import com.ericvizu.backendpc.dto.CpuDTO;
+import com.ericvizu.backendpc.entities.Cpu;
+import com.ericvizu.backendpc.entities.Cpu;
+import com.ericvizu.backendpc.repositories.CpuRepository;
+import com.ericvizu.backendpc.repositories.CpuRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.dialect.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -16,26 +18,26 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class MotherboardService {
+public class CpuService {
 
     @Autowired
-    private MotherboardRepository repository;
+    private CpuRepository repository;
 
-    // Create Motherboard
-    public Motherboard create(MotherboardDTO obj) {
-        Motherboard motherboard = new Motherboard(obj);
-        for (Motherboard m : findAll()) {
-            if ((Objects.equals(m.getName().toUpperCase(), motherboard.getName().toUpperCase())) && (Objects.equals(m.getBrand().toUpperCase(), motherboard.getBrand().toUpperCase()))) {
-                throw new DatabaseException("Motherboard with same name found");
+    // Create CPU
+    public Cpu create(CpuDTO obj) {
+        Cpu cpu = new Cpu(obj);
+        for (Cpu c : findAll()) {
+            if ((Objects.equals(c.getName().toUpperCase(), cpu.getName().toUpperCase())) && (Objects.equals(c.getBrand().toUpperCase(), cpu.getBrand().toUpperCase()))) {
+                throw new DatabaseException("CPU with same name found");
             }
         }
-        return repository.save(motherboard);
+        return repository.save(cpu);
     }
 
-    // Read Motherboard
-    public Motherboard read(Long id) {
+    // Read CPU
+    public Cpu read(Long id) {
         try {
-            Optional<Motherboard> obj = repository.findById(id);
+            Optional<Cpu> obj = repository.findById(id);
             return obj.orElseThrow(() -> new ResourceNotFoundException(id));
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
@@ -43,10 +45,10 @@ public class MotherboardService {
 
     }
 
-    // Update Motherboard
-    public Motherboard update(Long id, MotherboardDTO obj) {
+    // Update CPU
+    public Cpu update(Long id, CpuDTO obj) {
         try {
-            Motherboard entity = repository.getReferenceById(id);
+            Cpu entity = repository.getReferenceById(id);
             updateData(entity, obj);
             return repository.save(entity);
         } catch (EntityNotFoundException e) {
@@ -54,7 +56,7 @@ public class MotherboardService {
         }
     }
 
-    // Delete Motherboard
+    // Delete CPU
     public void delete(Long id) {
         try {
             if (!repository.existsById(id)) {
@@ -71,22 +73,19 @@ public class MotherboardService {
         }
     }
 
-    public List<Motherboard> findAll() {
+    public List<Cpu> findAll() {
         return repository.findAll();
     }
 
-    // Update each Motherboard entry
+    // Update each CPU entry
     // Method has to be updated if entity gets new parameters
-    public void updateData(Motherboard entity, MotherboardDTO obj) {
+    public void updateData(Cpu entity, CpuDTO obj) {
         if (!(obj.brand() == null)) entity.setBrand(obj.brand());
         if (!(obj.name() == null)) entity.setName(obj.name());
         if (!(obj.socket() == null)) entity.setSocket(obj.socket());
-        if (!(obj.ramGen() == null)) entity.setRamGen(obj.ramGen());
-        if (!(obj.ramSlots() == null)) entity.setRamSlots(obj.ramSlots());
-        if (!(obj.ramFreq() == null)) entity.setRamFreq(obj.ramFreq());
-        if (!(obj.sataSlots() == null)) entity.setSataSlots(obj.sataSlots());
-        if (!(obj.m2Gen3Slots() == null)) entity.setM2Gen3Slots(obj.m2Gen3Slots());
-        if (!(obj.m2Gen4Slots() == null)) entity.setM2Gen4Slots(obj.m2Gen4Slots());
+        if (!(obj.threads() == null)) entity.setThreads(obj.threads());
+        if (!(obj.cores() == null)) entity.setCores(obj.cores());
+        if (!(obj.tdp() == null)) entity.setTdp(obj.tdp());
     }
 
 }
