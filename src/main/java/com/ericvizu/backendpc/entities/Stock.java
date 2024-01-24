@@ -61,6 +61,14 @@ public class Stock implements Serializable {
         this.quantity = quantity;
     }
 
+    public Motherboard getMotherboard() {
+        return motherboard;
+    }
+
+    public void setMotherboard(Motherboard motherboard) {
+        this.motherboard = motherboard;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
