@@ -4,6 +4,7 @@ import com.ericvizu.backendpc.dto.MotherboardDTO;
 import com.ericvizu.backendpc.entities.Motherboard;
 import com.ericvizu.backendpc.repositories.MotherboardRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
+import com.ericvizu.backendpc.services.exceptions.DuplicateItemException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.dialect.Database;
@@ -26,7 +27,7 @@ public class MotherboardService {
         Motherboard motherboard = new Motherboard(obj);
         for (Motherboard m : findAll()) {
             if ((Objects.equals(m.getName().toUpperCase(), motherboard.getName().toUpperCase())) && (Objects.equals(m.getBrand().toUpperCase(), motherboard.getBrand().toUpperCase()))) {
-                throw new DatabaseException("Motherboard with same name found");
+                throw new DuplicateItemException("Motherboard with same name found");
             }
         }
         return repository.save(motherboard);
