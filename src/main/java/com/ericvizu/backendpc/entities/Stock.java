@@ -17,6 +17,9 @@ public class Stock implements Serializable {
     private String category; // Motherboard, CPU, GPU, etc.
     private Integer itemId; // Id in each category table
     private Integer quantity; // Quantity in stock
+    @OneToOne
+    @MapsId
+    private Motherboard motherboard;
     public Stock() {
     }
 

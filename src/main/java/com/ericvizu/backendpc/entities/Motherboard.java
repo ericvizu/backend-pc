@@ -22,6 +22,8 @@ public class Motherboard implements Serializable {
     private Integer sataSlots; // Assuming Sata3 version
     private Integer m2Gen4Slots; // How many M.2 Gen4 slots in Mobo
     private Integer m2Gen3Slots; // How many M.2 Gen3 Slots in Mobo
+    @OneToOne(mappedBy = "motherboard", cascade = CascadeType.ALL)
+    private Stock stock;
 
     // Opcionais futuros: DirectX version; Pixel Shader version;
 
@@ -52,7 +54,9 @@ public class Motherboard implements Serializable {
         return brand;
     }
 
-    public void setBrand(String brand) { this.brand = brand; }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
     public String getName() {
         return name;
@@ -116,6 +120,14 @@ public class Motherboard implements Serializable {
 
     public void setM2Gen3Slots(Integer m2Gen3Slots) {
         this.m2Gen3Slots = m2Gen3Slots;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     @Override
