@@ -1,10 +1,7 @@
 package com.ericvizu.backendpc.services;
 
 import com.ericvizu.backendpc.dto.StockDTO;
-import com.ericvizu.backendpc.dto.StockDTO;
 import com.ericvizu.backendpc.entities.Stock;
-import com.ericvizu.backendpc.entities.Stock;
-import com.ericvizu.backendpc.repositories.StockRepository;
 import com.ericvizu.backendpc.repositories.StockRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
@@ -14,7 +11,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service

@@ -7,7 +7,6 @@ import com.ericvizu.backendpc.services.exceptions.DatabaseException;
 import com.ericvizu.backendpc.services.exceptions.DuplicateItemException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.dialect.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
