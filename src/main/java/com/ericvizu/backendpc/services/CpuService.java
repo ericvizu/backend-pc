@@ -7,6 +7,7 @@ import com.ericvizu.backendpc.entities.Cpu;
 import com.ericvizu.backendpc.repositories.CpuRepository;
 import com.ericvizu.backendpc.repositories.CpuRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
+import com.ericvizu.backendpc.services.exceptions.DuplicateItemException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class CpuService {
         Cpu cpu = new Cpu(obj);
         for (Cpu c : findAll()) {
             if ((Objects.equals(c.getName().toUpperCase(), cpu.getName().toUpperCase())) && (Objects.equals(c.getBrand().toUpperCase(), cpu.getBrand().toUpperCase()))) {
-                throw new DatabaseException("CPU with same name found");
+                throw new DuplicateItemException("CPU with same name found");
             }
         }
         return repository.save(cpu);

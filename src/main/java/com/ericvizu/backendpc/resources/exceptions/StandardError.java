@@ -1,4 +1,4 @@
-package com.ericvizu.backendpc.services.exceptions;
+package com.ericvizu.backendpc.resources.exceptions;
 
 import java.io.Serializable;
 

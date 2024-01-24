@@ -1,15 +1,17 @@
 package com.ericvizu.backendpc.resources.exceptions;
 
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
+import com.ericvizu.backendpc.services.exceptions.DuplicateItemException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ResourceExceptionHandler {
-    @ExceptionHandler(DatabaseException.class)
+    @ExceptionHandler(DuplicateItemException.class)
     public ResponseEntity<StandardError> objectAlreadyExists(DatabaseException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.CONFLICT;
         StandardError err = new StandardError(status.value(), "Already exists",
