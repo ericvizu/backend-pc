@@ -1,11 +1,9 @@
 package com.ericvizu.backendpc.entities;
 
-import com.ericvizu.backendpc.dto.MotherboardDTO;
 import com.ericvizu.backendpc.dto.StockDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_stock")
@@ -15,17 +13,13 @@ public class Stock implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String category; // Motherboard, CPU, GPU, etc.
-    private Integer itemId; // Id in each category table
     private Integer quantity; // Quantity in stock
-    @OneToOne
-    @MapsId
-    private Motherboard motherboard;
+
     public Stock() {
     }
 
     public Stock(StockDTO stockDTO) {
         this.category = stockDTO.category();
-        this.itemId = stockDTO.itemId();
         this.quantity = stockDTO.quantity();
     }
 
@@ -45,28 +39,12 @@ public class Stock implements Serializable {
         this.category = category;
     }
 
-    public Integer getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
-    }
-
     public Integer getQuantity() {
         return quantity;
     }
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Motherboard getMotherboard() {
-        return motherboard;
-    }
-
-    public void setMotherboard(Motherboard motherboard) {
-        this.motherboard = motherboard;
     }
 
     @Override

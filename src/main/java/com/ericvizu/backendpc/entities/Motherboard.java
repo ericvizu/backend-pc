@@ -22,7 +22,9 @@ public class Motherboard implements Serializable {
     private Integer sataSlots; // Assuming Sata3 version
     private Integer m2Gen4Slots; // How many M.2 Gen4 slots in Mobo
     private Integer m2Gen3Slots; // How many M.2 Gen3 Slots in Mobo
-    @OneToOne(mappedBy = "motherboard", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "stock_id", referencedColumnName = "id")
+    @MapsId
     private Stock stock;
 
     // Opcionais futuros: DirectX version; Pixel Shader version;

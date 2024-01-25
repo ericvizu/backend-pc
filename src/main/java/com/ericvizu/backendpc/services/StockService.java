@@ -2,6 +2,7 @@ package com.ericvizu.backendpc.services;
 
 import com.ericvizu.backendpc.dto.StockDTO;
 import com.ericvizu.backendpc.entities.Stock;
+import com.ericvizu.backendpc.repositories.MotherboardRepository;
 import com.ericvizu.backendpc.repositories.StockRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
@@ -18,12 +19,12 @@ public class StockService {
 
     @Autowired
     private StockRepository repository;
+    @Autowired
+    private MotherboardRepository motherboardRepository;
 
     // Create new item in Stock from other categories
-    public Stock create(StockDTO obj, String category, Integer quantity) {
+    public Stock create(StockDTO obj) {
         Stock stock = new Stock(obj);
-        stock.setCategory(category);
-        stock.setQuantity(quantity);
         return repository.save(stock);
     }
 
@@ -33,7 +34,8 @@ public class StockService {
             if (category.equals("motherboard") || category.equals("cpu")) {
                 Optional<Stock> obj = repository.findById(id);
                 return obj.orElseThrow(() -> new ResourceNotFoundException(id));
-            } throw new RuntimeException("Category not valid.");
+            }
+            throw new RuntimeException("Category not valid.");
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
         }
@@ -76,7 +78,6 @@ public class StockService {
     // Method has to be updated if entity gets new parameters
     public void updateData(Stock entity, StockDTO obj) {
         if (!(obj.category() == null)) entity.setCategory(obj.category());
-        if (!(obj.itemId() == null)) entity.setItemId(obj.itemId());
         if (!(obj.quantity() == null)) entity.setQuantity(obj.quantity());
     }
 
