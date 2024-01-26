@@ -1,10 +1,9 @@
 package com.ericvizu.backendpc.services;
 
 import com.ericvizu.backendpc.dto.CpuDTO;
-import com.ericvizu.backendpc.dto.CpuDTO;
+import com.ericvizu.backendpc.dto.StockDTO;
 import com.ericvizu.backendpc.entities.Cpu;
-import com.ericvizu.backendpc.entities.Cpu;
-import com.ericvizu.backendpc.repositories.CpuRepository;
+import com.ericvizu.backendpc.entities.Stock;
 import com.ericvizu.backendpc.repositories.CpuRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
 import com.ericvizu.backendpc.services.exceptions.DuplicateItemException;
@@ -24,14 +23,21 @@ public class CpuService {
     @Autowired
     private CpuRepository repository;
 
+    @Autowired
+    private StockService stockService;
+
+
     // Create CPU
     public Cpu create(CpuDTO obj) {
         Cpu cpu = new Cpu(obj);
-        for (Cpu c : findAll()) {
-            if ((Objects.equals(c.getName().toUpperCase(), cpu.getName().toUpperCase())) && (Objects.equals(c.getBrand().toUpperCase(), cpu.getBrand().toUpperCase()))) {
-                throw new DuplicateItemException("CPU with same name found");
-            }
-        }
+//        for (Cpu c : findAll()) {
+//            if ((Objects.equals(c.getName().toUpperCase(), cpu.getName().toUpperCase())) && (Objects.equals(c.getBrand().toUpperCase(), cpu.getBrand().toUpperCase()))) {
+//                throw new DuplicateItemException("CPU with same name found");
+//            }
+//        }
+        StockDTO stockDTO = new StockDTO("cpu", obj.initialQuantity());
+        Stock stock = stockService.create(stockDTO);
+        cpu.setStock(stock);
         return repository.save(cpu);
     }
 

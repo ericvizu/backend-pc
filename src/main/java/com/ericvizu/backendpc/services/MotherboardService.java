@@ -5,7 +5,6 @@ import com.ericvizu.backendpc.dto.StockDTO;
 import com.ericvizu.backendpc.entities.Motherboard;
 import com.ericvizu.backendpc.entities.Stock;
 import com.ericvizu.backendpc.repositories.MotherboardRepository;
-import com.ericvizu.backendpc.repositories.StockRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,8 +22,6 @@ public class MotherboardService {
     private MotherboardRepository repository;
     @Autowired
     private StockService stockService;
-    @Autowired
-    private StockRepository stockRepository;
 
     // Create Motherboard
     public Motherboard create(MotherboardDTO obj) {

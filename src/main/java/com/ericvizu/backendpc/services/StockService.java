@@ -2,6 +2,7 @@ package com.ericvizu.backendpc.services;
 
 import com.ericvizu.backendpc.dto.StockDTO;
 import com.ericvizu.backendpc.entities.Stock;
+import com.ericvizu.backendpc.repositories.CpuRepository;
 import com.ericvizu.backendpc.repositories.MotherboardRepository;
 import com.ericvizu.backendpc.repositories.StockRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
@@ -21,6 +22,8 @@ public class StockService {
     private StockRepository repository;
     @Autowired
     private MotherboardRepository motherboardRepository;
+    @Autowired
+    private CpuRepository cpuRepository;
 
     // Create new item in Stock from other categories
     public Stock create(StockDTO obj) {

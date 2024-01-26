@@ -20,6 +20,11 @@ public class Cpu implements Serializable {
     private Integer threads;
     private Integer tdp;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "stock_id", referencedColumnName = "id")
+    @MapsId
+    private Stock stock;
+
     // baseClock, overClock, Cache
 
     public Cpu() {
@@ -32,6 +37,14 @@ public class Cpu implements Serializable {
         this.cores = CpuDTO.cores();
         this.threads = CpuDTO.threads();
         this.tdp = CpuDTO.tdp();
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     public Long getId() {
