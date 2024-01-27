@@ -6,7 +6,6 @@ import com.ericvizu.backendpc.entities.Cpu;
 import com.ericvizu.backendpc.entities.Stock;
 import com.ericvizu.backendpc.repositories.CpuRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
-import com.ericvizu.backendpc.services.exceptions.DuplicateItemException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,10 +20,8 @@ public class CpuService {
 
     @Autowired
     private CpuRepository repository;
-
     @Autowired
     private StockService stockService;
-
 
     // Create CPU
     public Cpu create(CpuDTO obj) {
@@ -49,7 +45,6 @@ public class CpuService {
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
         }
-
     }
 
     // Update CPU
@@ -70,7 +65,6 @@ public class CpuService {
                 throw new ResourceNotFoundException(id);
             }
             repository.deleteById(id);
-
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
         } catch (ResourceNotFoundException e) {

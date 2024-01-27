@@ -63,7 +63,6 @@ public class StockService {
                 throw new ResourceNotFoundException(id);
             }
             repository.deleteById(id);
-
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
         } catch (ResourceNotFoundException e) {

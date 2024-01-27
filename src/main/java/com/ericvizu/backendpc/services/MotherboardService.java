@@ -45,7 +45,6 @@ public class MotherboardService {
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
         }
-
     }
 
     // Update Motherboard
@@ -66,7 +65,6 @@ public class MotherboardService {
                 throw new ResourceNotFoundException(id);
             }
             repository.deleteById(id);
-
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
         } catch (ResourceNotFoundException e) {

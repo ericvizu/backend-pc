@@ -12,8 +12,8 @@ public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String category; // Motherboard, CPU, GPU, etc.
-    private Integer quantity; // Quantity in stock
+    private String category; // (ex. motherboard/gpu/cpu/...)
+    private Integer quantity; // Quantity in stock (POST from categories have initialQuantity)
 
     public Stock() {
     }

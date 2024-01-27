@@ -13,19 +13,19 @@ public class Motherboard implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String brand; // Mobo brand
-    private String name; // Mobo name
-    private String socket; // Mobo CPU socket
-    private String ramGen; // Mobo RAM generation
-    private Integer ramSlots; // How many RAM slots in Mobo
-    private Integer ramFreq; // Ram frequency support in Mobo
-    private Integer sataSlots; // Assuming Sata3 version
-    private Integer m2Gen4Slots; // How many M.2 Gen4 slots in Mobo
-    private Integer m2Gen3Slots; // How many M.2 Gen3 Slots in Mobo
+    private String brand; // Mobo brand (ex. ASRock/Gigabyte)
+    private String name; // Mobo name (ex. B550M Steel Legend/X570 Steel Legend)
+    private String socket; // Mobo CPU socket (ex. AM4/AM5/LGA1155)
+    private String ramGen; // Mobo RAM generation (ex. DDR3/DDR4/DDR5)
+    private Integer ramSlots; // How many RAM slots in Mobo (ex. 2/4)
+    private Integer ramFreq; // Ram frequency support in Mobo (in MHz) (ex. 3200/3600)
+    private Integer sataSlots; // Assuming Sata3 version (ex. 6)
+    private Integer m2Gen4Slots; // How many M.2 Gen4 slots in Mobo (ex. 0/1/2)
+    private Integer m2Gen3Slots; // How many M.2 Gen3 Slots in Mobo (ex. 0/1/2)
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "stock_id", referencedColumnName = "id")
     @MapsId
-    private Stock stock;
+    private Stock stock; // Must pass initialQuantity in body
 
     // Opcionais futuros: DirectX version; Pixel Shader version;
 
