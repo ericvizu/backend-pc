@@ -1,6 +1,7 @@
 package com.ericvizu.backendpc.resources.exceptions;
 
 import com.ericvizu.backendpc.services.exceptions.DuplicateItemException;
+import com.ericvizu.backendpc.services.exceptions.InvalidNumberException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,13 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.CONFLICT;
         StandardError err = new StandardError(status.value(), "Resource not found",
+                e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+
+    }@ExceptionHandler(InvalidNumberException.class)
+    public ResponseEntity<StandardError> resourceNotFound(InvalidNumberException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.CONFLICT;
+        StandardError err = new StandardError(status.value(), "Invalid number",
                 e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }

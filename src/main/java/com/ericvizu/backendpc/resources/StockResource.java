@@ -36,8 +36,8 @@ public class StockResource {
 
     // TODO PUT: O método principal de adicionar/remover itens do estoque, que vai pro frontend
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Stock> update(@PathVariable Long id, @RequestBody StockDTO obj) {
-        Stock entity = service.update(id, obj);
+    public ResponseEntity<Stock> update(@PathVariable Long id, @RequestBody String quantity) {
+        Stock entity = service.update(id, quantity);
         return ResponseEntity.ok().body(entity);
     }
 

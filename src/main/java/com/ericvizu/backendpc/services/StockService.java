@@ -6,6 +6,7 @@ import com.ericvizu.backendpc.repositories.CpuRepository;
 import com.ericvizu.backendpc.repositories.MotherboardRepository;
 import com.ericvizu.backendpc.repositories.StockRepository;
 import com.ericvizu.backendpc.services.exceptions.DatabaseException;
+import com.ericvizu.backendpc.services.exceptions.InvalidNumberException;
 import com.ericvizu.backendpc.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +43,21 @@ public class StockService {
     }
 
     // Update Stock
-    public Stock update(Long id, StockDTO obj) {
+    public Stock update(Long id, String quantity) {
         try {
             Stock entity = repository.getReferenceById(id);
-            updateData(entity, obj);
+            stockVariation(entity, quantity);
             return repository.save(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
+        }
+    }
+
+    public void stockVariation(Stock entity, String quantity) {
+        try {
+            entity.setQuantity(entity.getQuantity() + Integer.parseInt(quantity));
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException("Invalid number parsed, must be an integer");
         }
     }
 
@@ -71,12 +80,4 @@ public class StockService {
     public List<Stock> findAll() {
         return repository.findAll();
     }
-
-    // Update each Stock entry
-    // Method has to be updated if entity gets new parameters
-    public void updateData(Stock entity, StockDTO obj) {
-        if (!(obj.category() == null)) entity.setCategory(obj.category());
-        if (!(obj.quantity() == null)) entity.setQuantity(obj.quantity());
-    }
-
 }
