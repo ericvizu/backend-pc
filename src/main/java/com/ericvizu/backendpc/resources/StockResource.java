@@ -3,6 +3,7 @@ package com.ericvizu.backendpc.resources;
 import com.ericvizu.backendpc.dto.StockDTO;
 import com.ericvizu.backendpc.entities.Stock;
 import com.ericvizu.backendpc.services.StockService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class StockResource {
 
     @Autowired
     private StockService service;
-
+    // POST: Talvez não colocar
 //    @PostMapping
 //    public ResponseEntity<Stock> create(@RequestBody StockDTO obj, @RequestBody String category) {
 //        Stock newObj = service.create(obj, category);
@@ -26,24 +27,28 @@ public class StockResource {
 //        return ResponseEntity.created(uri).body(newObj);
 //    }
 
-//    @GetMapping(value = "/{id}")
-//    public ResponseEntity<Stock> read(@PathVariable Long id) {
-//        Stock obj = service.read(id);
-//        return ResponseEntity.ok().body(obj);
-//    }
+    // Se acabar usando livraria pra mexer com Json (como JsonPath), dá usar Json pra passar a category usando JSONObject e getString()
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Stock> read(@PathVariable Long id) {
+        Stock obj = service.read(id);
+        return ResponseEntity.ok().body(obj);
+    }
 
+    // TODO PUT: O método principal de adicionar/remover itens do estoque, que vai pro frontend
     @PutMapping(value = "/{id}")
     public ResponseEntity<Stock> update(@PathVariable Long id, @RequestBody StockDTO obj) {
         Stock entity = service.update(id, obj);
         return ResponseEntity.ok().body(entity);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Stock> delete(@PathVariable Long id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+    // DELETE: Talvez não colocar, ou só pra developer pra bugfix pra caso exclua algum item em outra table e aqui não
+//    @DeleteMapping(value = "/{id}")
+//    public ResponseEntity<Stock> delete(@PathVariable Long id) {
+//        service.delete(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
+    // TODO FINDALL: Adicionar o nome do item que tá contando no id
     @GetMapping
     public ResponseEntity<List<Stock>> findAll() {
         return ResponseEntity.ok().body(service.findAll());

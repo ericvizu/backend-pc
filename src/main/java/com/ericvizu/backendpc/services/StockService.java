@@ -32,17 +32,13 @@ public class StockService {
     }
 
     // Read Stock with Category and Id from the tb_[category]
-    public Stock read(String category, Long id) {
+    public Stock read(Long id) {
         try {
-            if (category.equals("motherboard") || category.equals("cpu")) {
-                Optional<Stock> obj = repository.findById(id);
-                return obj.orElseThrow(() -> new ResourceNotFoundException(id));
-            }
-            throw new RuntimeException("Category not valid.");
+            Optional<Stock> obj = repository.findById(id);
+            return obj.orElseThrow(() -> new ResourceNotFoundException(id));
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Missing id number.");
         }
-
     }
 
     // Update Stock
