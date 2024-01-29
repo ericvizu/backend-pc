@@ -27,7 +27,7 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(status).body(err);
 
     }@ExceptionHandler(InvalidNumberException.class)
-    public ResponseEntity<StandardError> resourceNotFound(InvalidNumberException e, HttpServletRequest request) {
+    public ResponseEntity<StandardError> invalidNumberInserted(InvalidNumberException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.CONFLICT;
         StandardError err = new StandardError(status.value(), "Invalid number",
                 e.getMessage(), request.getRequestURI());
