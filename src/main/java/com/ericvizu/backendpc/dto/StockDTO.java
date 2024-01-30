@@ -1,4 +1,4 @@
 package com.ericvizu.backendpc.dto;
 
-public record StockDTO(String category, Integer quantity) {
+public record StockDTO(String category, Integer quantity, String name) {
 }

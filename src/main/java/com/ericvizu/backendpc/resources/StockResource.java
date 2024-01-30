@@ -44,6 +44,7 @@ public class StockResource {
 //    }
 
     // TODO FINDALL: Adicionar o nome do item que tá contando no id
+    //  Talvez criar um DTO com as info + nome, não sei
     @GetMapping
     public ResponseEntity<List<Stock>> findAll() {
         return ResponseEntity.ok().body(service.findAll());

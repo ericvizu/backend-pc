@@ -31,7 +31,7 @@ public class CpuService {
 //                throw new DuplicateItemException("CPU with same name found");
 //            }
 //        }
-        StockDTO stockDTO = new StockDTO("cpu", obj.initialQuantity());
+        StockDTO stockDTO = new StockDTO("cpu", obj.initialQuantity(), cpu.getName());
         Stock stock = stockService.create(stockDTO);
         cpu.setStock(stock);
         return repository.save(cpu);

@@ -14,6 +14,7 @@ public class Stock implements Serializable {
     private Long id;
     private String category; // (ex. motherboard/gpu/cpu/...)
     private Integer quantity; // Quantity in stock (POST from categories have initialQuantity)
+    private String name; // Name of item (not Brand)
 
     public Stock() {
     }
@@ -21,6 +22,7 @@ public class Stock implements Serializable {
     public Stock(StockDTO stockDTO) {
         this.category = stockDTO.category();
         this.quantity = stockDTO.quantity();
+        this.name = stockDTO.name();
     }
 
     public Long getId() {
@@ -45,6 +47,14 @@ public class Stock implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

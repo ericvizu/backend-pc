@@ -31,7 +31,7 @@ public class MotherboardService {
 //                throw new DuplicateItemException("Motherboard with same name found");
 //            }
 //        }
-        StockDTO stockDTO = new StockDTO("motherboard", obj.initialQuantity());
+        StockDTO stockDTO = new StockDTO("motherboard", obj.initialQuantity(), motherboard.getName());
         Stock stock = stockService.create(stockDTO);
         motherboard.setStock(stock);
         return repository.save(motherboard);
