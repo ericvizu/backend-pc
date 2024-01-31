@@ -15,13 +15,6 @@ public class StockResource {
 
     @Autowired
     private StockService service;
-    // POST: Talvez não colocar
-//    @PostMapping
-//    public ResponseEntity<Stock> create(@RequestBody StockDTO obj, @RequestBody String category) {
-//        Stock newObj = service.create(obj, category);
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
-//        return ResponseEntity.created(uri).body(newObj);
-//    }
 
     // Se acabar usando livraria pra mexer com Json (como JsonPath), dá usar Json pra passar a category usando JSONObject e getString()
     @GetMapping(value = "/{id}")
@@ -36,18 +29,24 @@ public class StockResource {
         return ResponseEntity.ok().body(entity);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Stock>> findAll() {
+        return ResponseEntity.ok().body(service.findAll());
+    }
+
+    // POST: Talvez não colocar
+//    @PostMapping
+//    public ResponseEntity<Stock> create(@RequestBody StockDTO obj, @RequestBody String category) {
+//        Stock newObj = service.create(obj, category);
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+//        return ResponseEntity.created(uri).body(newObj);
+//    }
+
     // DELETE: Talvez não colocar, ou só pra developer pra bugfix pra caso exclua algum item em outra table e aqui não
 //    @DeleteMapping(value = "/{id}")
 //    public ResponseEntity<Stock> delete(@PathVariable Long id) {
 //        service.delete(id);
 //        return ResponseEntity.noContent().build();
 //    }
-
-    // TODO FINDALL: Adicionar o nome do item que tá contando no id
-    //  Talvez criar um DTO com as info + nome, não sei
-    @GetMapping
-    public ResponseEntity<List<Stock>> findAll() {
-        return ResponseEntity.ok().body(service.findAll());
-    }
 
 }
