@@ -12,19 +12,17 @@ public class Cpu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String brand; // CPU Brand (ex. AMD/Intel)
+    private String brand; // CPU brand (ex. AMD/Intel)
     private String name; // CPU name (ex. Ryzen 5 5600X/i3 2100)
     private String socket; // CPU socket (ex. AM4/AM5/LGA1155)
     private Integer cores; // CPU physical cores (ex. 6)
     private Integer threads; // CPU threads (ex. 12)
-    private Integer tdp; // CPU TDP wattage (ex. 65)
+    private Integer tdp; // CPU TDP (in Watts) (ex. 65)
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "stock_id", referencedColumnName = "id")
     @MapsId
     private Stock stock; // Must pass initialQuantity in body
-
-    // baseClock, overClock, Cache
 
     public Cpu() {
     }
