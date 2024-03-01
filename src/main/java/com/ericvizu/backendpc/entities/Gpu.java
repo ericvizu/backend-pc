@@ -17,7 +17,7 @@ public class Gpu implements Serializable {
     private Integer baseClock; // GPU base clock (in MHz) (ex. 1257/1127)
     private Integer boostClock; // GPU boosted clock (in MHz) (ex. 1340/1178)
     private Integer vramSize; // GPU VRAM size (in gb) (ex. 8/2)
-    private String vramGen; // GPU VRAM generation (ex. GGDR5/GDDR4)
+    private String vramGen; // GPU VRAM generation (ex. GDDR5/GDDR4)
     private Integer tdp; // GPU TDP/TBP (in Watts) (ex. 185/120)
 
     // Future ideas: supported rendering format (h264/h265/hevc), outputs (hdmi, dvi, displayport)

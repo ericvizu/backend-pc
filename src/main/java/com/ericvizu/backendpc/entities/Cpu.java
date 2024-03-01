@@ -18,7 +18,7 @@ public class Cpu implements Serializable {
     private Integer cores; // CPU physical cores (ex. 6)
     private Integer threads; // CPU threads (ex. 12)
     private Integer tdp; // CPU TDP (in Watts) (ex. 65)
-
+    // Base Clock and Overclock
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "stock_id", referencedColumnName = "id")
     @MapsId
