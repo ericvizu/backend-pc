@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 public class StockService {
-
+// TODO insertion
     @Autowired
     private StockRepository repository;
     @Autowired
