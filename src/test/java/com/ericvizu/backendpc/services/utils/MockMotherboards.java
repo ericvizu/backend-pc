@@ -18,7 +18,7 @@ public class MockMotherboards {
     public static Integer M2GEN3SLOTS = 0;
 
     public static MotherboardDTO mockMotherboardDTO() {
-        return new MotherboardDTO(NAME, SOCKET, RAMGEN, RAMSLOTS, RAMFREQ, SATASLOTS, M2GEN4SLOTS, M2GEN3SLOTS);
+        return new MotherboardDTO(BRAND, NAME, SOCKET, RAMGEN, RAMSLOTS, RAMFREQ, SATASLOTS, M2GEN4SLOTS, M2GEN3SLOTS, M2GEN3SLOTS);
     }
 
     public static Motherboard mockMotherboardEntity() {

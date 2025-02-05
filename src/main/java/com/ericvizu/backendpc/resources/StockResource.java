@@ -42,6 +42,7 @@ public class StockResource {
 //        return ResponseEntity.created(uri).body(newObj);
 //    }
 
+    // TODO Implementar o Delete
     // DELETE: Talvez não colocar, ou só pra developer pra bugfix pra caso exclua algum item em outra table e aqui não
 //    @DeleteMapping(value = "/{id}")
 //    public ResponseEntity<Stock> delete(@PathVariable Long id) {
