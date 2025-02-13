@@ -48,7 +48,7 @@ Utilizando o Spring initializr foi criado um projeto Maven com Spring 3.2.1 e Ja
 ## Rotas API
 
 #### Serviço de entidades
-Ao final há um json para importação no Postman para uma coleção com alguns itens básicos.
+Ao final há um JSON de exemplo para importação no Postman, contendo uma coleção com exemplos de comandos para utilização de testes para as entidades.
 
 **CPU**
 |Método HTTP | URL                              | Descrição                 |
@@ -106,6 +106,7 @@ Ao final há um json para importação no Postman para uma coleção com alguns 
 |`GET`       |http://localhost:8000/stock/            | Buscar todo Stock                   |
 
 <br>
+
 
 <details>
   <summary> Postman JSON </summary>
